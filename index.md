@@ -1,37 +1,60 @@
-## Welcome to GitHub Pages
+# Specifikáció
 
-You can use the [editor on GitHub](https://github.com/becgabi/ptma-flutter-client/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## Bevezetés
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Projekt ötlet
 
-### Markdown
+Saját időpontok és edzéstervek megtekintése a [PTMA](https://ptma-test.herokuapp.com/) alkalmazásból (időpontfoglaló
+webes alkalmazás, amit az önlabon készítettem).
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Legfontosabb cél
 
-```markdown
-Syntax highlighted code block
+5 képernyő: 2 listázó, egy részletező, egy bejelentkező és egy rólunk nézet. PTMA publikus API-jának használata, és adatok lokális tárolása.
 
-# Header 1
-## Header 2
-### Header 3
+### Platform
 
-- Bulleted
-- List
+Android-ot és iOS-t támogató alkalmazás, flutter nyelven.
 
-1. Numbered
-2. List
+### Támogatott nyelv
 
-**Bold** and _Italic_ and `Code` text
+Angol
 
-[Link](url) and ![Image](src)
-```
+## Általános követelmények
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Online/Offline
 
-### Jekyll Themes
+Offline megtekinthetők a korábban betöltött adatok.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/becgabi/ptma-flutter-client/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+### Backend kapcsolat
 
-### Support or Contact
+Kommunikáció a PTMA szerverrel, JWT tokennel, https-en keresztül.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Specifikus követelmények
+
+### Képernyők részletes leírása
+
+#### Login
+
+A bejelentkező felület, ahol az email cím és jelszó megadásával lehet belépni.
+
+#### About
+
+Néhány soros információ az alkalmazásról, a fejlesztőről és a szoftver licenszéről.
+
+#### Appointment list
+
+A Trainer időpontjait jeleníti meg egy listában. A lista elemei tartalmazzák a helyszínt, a vendéget, az időpont státuszát és a pontos időintervallumot.
+
+#### Workout plan list
+
+Az edzéstervek megjelenítése egy listában. Az elemekben megtalálható az edzésterv elnevezése, hozzá tartozó izomcsoportok és az időtartam.
+
+#### Workout plan detail
+
+Az edzésterv részletező nézetének fejlécében megjelennek az edzésterv adatai (név, izomcsoportok, időtartam), és egy listában a hozzá tartozó gyakorlatok. A gyakorlatok tartalmaznak egy elnevezést, leírást és időtartamot, illetve tartalmazhatnak sorozat és ismétlés számot is.
+
+### Navigáció
+
+Az alkalmazás megnyitásakor a login képernyő jelenik meg. A belépés után az oldalsó menüból választhatjuk ki a képernyőket (Appointments, Workout plans, About), amik között szabadon lépegethetünk.
+Az edzéstervek listájából egy elemre kattintva a részletező képernyőre navigálhatunk, ahonnan csak visszanavigálással térhetünk vissza a listázó oldalra.
+A Logout gombra kattintva visszatérünk a bejelentkező képernyőre.
