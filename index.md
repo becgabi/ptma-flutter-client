@@ -9,7 +9,7 @@ webes alkalmazás, amit az önlabon készítettem).
 
 ### Legfontosabb cél
 
-5 képernyő: 2 listázó, egy részletező, egy bejelentkező és egy rólunk nézet. PTMA publikus API-jának használata, és adatok lokális tárolása.
+4 képernyő: 2 listázó, egy részletező és egy bejelentkező nézet. PTMA publikus API-jának használata, és adatok lokális tárolása.
 
 ### Platform
 
@@ -37,10 +37,6 @@ Kommunikáció a PTMA szerverrel, JWT tokennel, https-en keresztül.
 
 A bejelentkező felület, ahol az email cím és jelszó megadásával lehet belépni.
 
-#### About
-
-Néhány soros információ az alkalmazásról, a fejlesztőről és a szoftver licenszéről.
-
 #### Appointment list
 
 A Trainer időpontjait jeleníti meg egy listában. A lista elemei tartalmazzák a helyszínt, a vendéget, az időpont státuszát és a pontos időintervallumot.
@@ -55,6 +51,6 @@ Az edzésterv részletező nézetének fejlécében megjelennek az edzésterv ad
 
 ### Navigáció
 
-Az alkalmazás megnyitásakor a login képernyő jelenik meg. A belépés után az oldalsó menüból választhatjuk ki a képernyőket (Appointments, Workout plans, About), amik között szabadon lépegethetünk.
+Az alkalmazás megnyitásakor a login képernyő jelenik meg. A belépés után az oldalsó menüból választhatjuk ki a képernyőket (Appointments, Workout plans), amik között szabadon lépegethetünk.
 Az edzéstervek listájából egy elemre kattintva a részletező képernyőre navigálhatunk, ahonnan csak visszanavigálással térhetünk vissza a listázó oldalra.
 A Logout gombra kattintva visszatérünk a bejelentkező képernyőre.
