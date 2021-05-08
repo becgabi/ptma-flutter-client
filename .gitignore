@@ -23,6 +23,8 @@ doc/api/
 # Mac
 .DS_Store
 
-
 # IntelliJ IDEA
 .idea
+
+# Generated files
+*.g.dart
