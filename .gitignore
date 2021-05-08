@@ -28,3 +28,9 @@ doc/api/
 
 # Generated files
 *.g.dart
+
+# Flutter
+.flutter-plugins
+.flutter-plugins-dependencies
+Podfile
+generated_plugin_registrant.dart
