@@ -33,4 +33,5 @@ doc/api/
 .flutter-plugins
 .flutter-plugins-dependencies
 Podfile
+*.lock
 generated_plugin_registrant.dart
