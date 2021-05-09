@@ -18,7 +18,8 @@ class AppointmentListCubit extends Cubit<AppointmentListState> {
       emit(ListReady(appointments));
     } on Exception catch (e) {
       print("Error occurred during loading the list: ${e.toString()}");
-      // TODO: load data from cache
+      final appointments = await _interactor.getCachedAppointmentList();
+      emit(ListReady(appointments));
     }
   }
 }
