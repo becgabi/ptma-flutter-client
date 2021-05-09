@@ -29,7 +29,11 @@ class AppointmentListPage extends StatelessWidget {
               if (state is Loading) {
                 return context.centerProgressBar;
               } else if (state is ListReady) {
-                return AppointmentListContent(state);
+                if (state.appointments.isEmpty) {
+                  return context.emptyList;
+                } else {
+                  return AppointmentListContent(state);
+                }
               }
 
               return Center(child: Text("An unexpected error occurred."));

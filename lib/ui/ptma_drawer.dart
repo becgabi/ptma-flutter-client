@@ -32,10 +32,7 @@ class PtmaDrawer extends StatelessWidget {
           ),
           ListTile(
             title: context.whiteText('Appointments'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.popAndPushNamed(context, APPOINTMENT_LIST_PAGE);
-            },
+            onTap: () => context.popAndPush(APPOINTMENT_LIST_PAGE),
           ),
           ListTile(
             title: context.whiteText('Workouts'),
@@ -47,14 +44,7 @@ class PtmaDrawer extends StatelessWidget {
           ListTile(
             title: context.whiteText('Logout'),
             onTap: () {
-              _deleteToken().then((value) {
-                Navigator.pop(context);
-                Navigator.popUntil(
-                  context,
-                  ModalRoute.withName(Navigator.defaultRouteName),
-                );
-                Navigator.popAndPushNamed(context, LOGIN_PAGE);
-              });
+              _deleteToken().then((value) => context.popAndPush(LOGIN_PAGE));
             },
           ),
         ],
