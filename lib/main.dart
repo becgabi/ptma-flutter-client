@@ -1,113 +1,76 @@
+import 'dart:convert' show json, base64, ascii;
+
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:ptma_flutter_client/di/di_config.dart';
+import 'package:ptma_flutter_client/ui/appointmentlist/appointment_list.dart';
+import 'package:ptma_flutter_client/ui/login/login.dart';
+import 'package:ptma_flutter_client/ui/util.dart';
 
 void main() {
-  runApp(MyApp());
+  initDependencies();
+  runApp(PtmaApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+class PtmaApp extends StatelessWidget {
+  Future<bool> get _isUserLoggedIn async {
+    final storage = FlutterSecureStorage();
+    var token = await storage.read(key: "jwtToken") ?? "";
+    var jwt = token.split(".");
+    if (jwt.length == 3) {
+      var payload =
+          json.decode(ascii.decode(base64.decode(base64.normalize(jwt[1]))));
+      if (DateTime.fromMillisecondsSinceEpoch(payload["exp"] * 1000)
+          .isAfter(DateTime.now())) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+    return FutureBuilder(
+      future: injector.allReady(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return MaterialApp(
+            title: 'PTMA Application',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+              scaffoldBackgroundColor: Color(0xFFECF5FB),
+              textTheme: TextTheme(
+                subtitle1: TextStyle(),
+                bodyText1: TextStyle(),
+                bodyText2: TextStyle(),
+              ).apply(
+                bodyColor: Colors.black54,
+                displayColor: Colors.black54,
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+            home: FutureBuilder<bool>(
+                future: _isUserLoggedIn,
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return context.centerProgressBar;
+                  }
+                  var loggedIn = snapshot.data!;
+                  if (loggedIn) {
+                    return AppointmentListPage();
+                  } else {
+                    return LoginPage();
+                  }
+                }),
+            routes: {
+              LOGIN_PAGE: (context) => LoginPage(),
+              APPOINTMENT_LIST_PAGE: (context) => AppointmentListPage(),
+              // TODO: define workouts page route
+            },
+          );
+        }
+
+        return context.centerProgressBar;
+      },
     );
   }
 }
