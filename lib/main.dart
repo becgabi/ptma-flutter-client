@@ -6,6 +6,7 @@ import 'package:ptma_flutter_client/di/di_config.dart';
 import 'package:ptma_flutter_client/ui/appointmentlist/appointment_list.dart';
 import 'package:ptma_flutter_client/ui/login/login.dart';
 import 'package:ptma_flutter_client/ui/util.dart';
+import 'package:ptma_flutter_client/ui/workoutlist/workout_list.dart';
 
 void main() {
   initDependencies();
@@ -64,7 +65,8 @@ class PtmaApp extends StatelessWidget {
             routes: {
               LOGIN_PAGE: (context) => LoginPage(),
               APPOINTMENT_LIST_PAGE: (context) => AppointmentListPage(),
-              // TODO: define workouts page route
+              WORKOUT_LIST_PAGE: (context) => WorkoutListPage(),
+              // TODO: define workout detail page route
             },
           );
         }

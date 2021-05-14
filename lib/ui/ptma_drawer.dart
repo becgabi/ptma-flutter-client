@@ -3,6 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:ptma_flutter_client/ui/appointmentlist/appointment_list.dart';
 import 'package:ptma_flutter_client/ui/login/login.dart';
 import 'package:ptma_flutter_client/ui/util.dart';
+import 'package:ptma_flutter_client/ui/workoutlist/workout_list.dart';
 
 class PtmaDrawer extends StatelessWidget {
   final storage = new FlutterSecureStorage();
@@ -36,10 +37,7 @@ class PtmaDrawer extends StatelessWidget {
           ),
           ListTile(
             title: context.whiteText('Workouts'),
-            onTap: () {
-              Navigator.pop(context);
-              // TODO: navigate to workout list
-            },
+            onTap: () => context.popAndPush(WORKOUT_LIST_PAGE),
           ),
           ListTile(
             title: context.whiteText('Logout'),

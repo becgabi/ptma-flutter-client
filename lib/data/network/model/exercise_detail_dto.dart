@@ -9,8 +9,8 @@ part 'exercise_detail_dto.g.dart';
 @JsonSerializable()
 class ExerciseDetailDto {
   final int id;
-  final int sets;
-  final int reps;
+  final int? sets;
+  final int? reps;
   final int duration;
   final ExerciseDto exercise;
 

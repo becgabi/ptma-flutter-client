@@ -26,5 +26,5 @@ abstract class PtmaApi {
   Future<List<WorkoutDto>> findAll();
 
   @GET("/api/workouts/{id}")
-  Future<WorkoutDto> getOne(@Path() String id);
+  Future<WorkoutDto?> getOne(@Path() String id);
 }

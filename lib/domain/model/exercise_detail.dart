@@ -5,8 +5,8 @@ import 'package:ptma_flutter_client/domain/model/exercise.dart';
 @immutable
 class ExerciseDetail extends Equatable {
   final int id;
-  final int sets;
-  final int reps;
+  final int? sets;
+  final int? reps;
   final int duration;
   final Exercise exercise;
 
