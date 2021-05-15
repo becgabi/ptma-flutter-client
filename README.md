@@ -11,4 +11,4 @@ Usage:
 1. Start
     - flutter run lib/main.dart
 
-Github repo can be found [here](https://github.com/becgabi/ptma-flutter-client)
+Github repo [here](https://github.com/becgabi/ptma-flutter-client)
