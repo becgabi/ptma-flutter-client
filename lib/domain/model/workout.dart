@@ -37,4 +37,7 @@ class Workout extends Equatable {
         trainerId,
         exercises,
       ];
+
+  int get sumDuration =>
+      exercises.fold(0, (sum, exercise) => sum + exercise.duration);
 }

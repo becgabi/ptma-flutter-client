@@ -24,7 +24,7 @@ class AppointmentDiskDataSource {
 
   Future<void> _insert(List<Appointment> appointments) async {
     await _appointmentDao.insert(appointments
-        .map((appointment) => appointment.toFloorEntities())
+        .map((appointment) => appointment.toFloorEntity())
         .toList());
   }
 }
@@ -43,7 +43,7 @@ extension on FloorAppointment {
 }
 
 extension on Appointment {
-  FloorAppointment toFloorEntities() {
+  FloorAppointment toFloorEntity() {
     return FloorAppointment(
       id: this.id,
       start: this.start,

@@ -9,8 +9,8 @@ import 'model/workout_dto.dart';
 
 part 'ptma_api.g.dart';
 
-// @RestApi(baseUrl: "https://ptma-test.herokuapp.com/")
-@RestApi(baseUrl: "http://192.168.0.56:8080/")
+@RestApi(baseUrl: "https://ptma-test.herokuapp.com/")
+// For local debug purposes: @RestApi(baseUrl: "http://192.168.0.56:8080/")
 abstract class PtmaApi {
   factory PtmaApi(DioConfig dioConfig) {
     return _PtmaApi(dioConfig.dio);
@@ -26,5 +26,5 @@ abstract class PtmaApi {
   Future<List<WorkoutDto>> findAll();
 
   @GET("/api/workouts/{id}")
-  Future<WorkoutDto> getOne(@Path() String id);
+  Future<WorkoutDto?> getOne(@Path() int id);
 }

@@ -30,9 +30,9 @@ class PtmaNetworkDataSource {
     return workouts.map((workout) => workout.toDomain()).toList();
   }
 
-  Future<Workout> getOne(String id) async {
+  Future<Workout?> getOne(int id) async {
     final workout = await _api.getOne(id);
-    return workout.toDomain();
+    return workout?.toDomain();
   }
 }
 
@@ -60,7 +60,7 @@ extension on ExerciseDto {
   }
 }
 
-extension on ExerciseDetailDto {
+extension ExerciseDetailExtension on ExerciseDetailDto {
   ExerciseDetail toDomain() {
     return ExerciseDetail(
       id: this.id,

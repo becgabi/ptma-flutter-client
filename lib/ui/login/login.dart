@@ -5,9 +5,9 @@ import 'package:ptma_flutter_client/ui/appointmentlist/appointment_list.dart';
 import 'package:ptma_flutter_client/ui/login/login_cubit.dart';
 import 'package:ptma_flutter_client/ui/util.dart';
 
-const LOGIN_PAGE = "/login";
-
 class LoginPage extends StatefulWidget {
+  static const routeName = "/login";
+
   @override
   State<StatefulWidget> createState() => _LoginPageState();
 }
@@ -78,7 +78,10 @@ class _LoginPageState extends State<LoginPage> {
                     } else if (state is Loading) {
                       context.centerProgressBar;
                     } else if (state is LoggedIn) {
-                      Navigator.popAndPushNamed(context, APPOINTMENT_LIST_PAGE);
+                      Navigator.popAndPushNamed(
+                        context,
+                        AppointmentListPage.routeName,
+                      );
                     }
                   },
                   child: BlocBuilder<LoginCubit, LoginState>(
