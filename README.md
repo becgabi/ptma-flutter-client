@@ -10,3 +10,5 @@ Usage:
     - flutter pub run build_runner build
 1. Start
     - flutter run lib/main.dart
+
+Github repo can be found [here](https://github.com/becgabi/ptma-flutter-client)
