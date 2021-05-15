@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 extension ContextExtension on BuildContext {
   get centerProgressBar => Center(child: CircularProgressIndicator());
 
-  get emptyList => Center(child: Text("There is no element in the list"));
+  get emptyList => centerText("There is no element in the list");
+
+  get errorOccurred => centerText("An unexpected error occurred");
+
+  centerText(String text) => Center(child: Text(text));
 
   whiteText(String text) => Text(text, style: TextStyle(color: Colors.white));
 

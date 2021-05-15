@@ -1,11 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ptma_flutter_client/domain/model/workout.dart';
-import 'package:ptma_flutter_client/ui/util.dart';
+import 'package:ptma_flutter_client/ui/workoutdetail/workout_detail.dart';
 import 'package:ptma_flutter_client/ui/workoutlist/workout_list_cubit.dart';
+import 'package:ptma_flutter_client/ui/workoutlist/workout_main_data.dart';
 
 class WorkoutListContent extends StatefulWidget {
   final ListReady state;
@@ -53,40 +52,11 @@ class _WorkoutListContentState extends State<WorkoutListContent> {
                   Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: ListTile(
-                      title: Row(
-                        children: [
-                          Expanded(
-                            flex: 4,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 2.0),
-                                  child: Text(
-                                    item.name,
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Wrap(
-                                  children: _buildMuscleGroups(item),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 2.0),
-                                  child: Text("${_getSumDuration(item)} min"),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                      title: WorkoutMainData(item: item),
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        WorkoutDetailPage.routeName,
+                        arguments: item,
                       ),
                     ),
                   ),
@@ -101,22 +71,5 @@ class _WorkoutListContentState extends State<WorkoutListContent> {
         ),
       ),
     );
-  }
-
-  List<Padding> _buildMuscleGroups(Workout item) {
-    return item.exercises
-        .expand((exercise) => exercise.exercise.muscleGroups)
-        .toSet()
-        .map((muscleGroup) => Padding(
-              padding: const EdgeInsets.only(left: 2.0, right: 2.0),
-              child: Chip(
-                label: Text(describeEnum(muscleGroup).capitalize),
-              ),
-            ))
-        .toList();
-  }
-
-  int _getSumDuration(Workout item) {
-    return item.exercises.fold(0, (sum, exercise) => sum + exercise.duration);
   }
 }

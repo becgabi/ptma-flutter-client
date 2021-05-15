@@ -30,7 +30,7 @@ class PtmaNetworkDataSource {
     return workouts.map((workout) => workout.toDomain()).toList();
   }
 
-  Future<Workout?> getOne(String id) async {
+  Future<Workout?> getOne(int id) async {
     final workout = await _api.getOne(id);
     return workout?.toDomain();
   }

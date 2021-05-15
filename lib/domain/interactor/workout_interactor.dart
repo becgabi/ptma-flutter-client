@@ -16,7 +16,7 @@ class WorkoutInteractor {
     return workouts;
   }
 
-  Future<Workout?> getOne(String id) async {
+  Future<Workout?> getOne(int id) async {
     final workout = await _dataSource.getOne(id);
     if (workout != null) {
       await _diskDataSource.updateWorkout(workout);

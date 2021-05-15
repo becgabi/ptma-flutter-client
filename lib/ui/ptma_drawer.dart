@@ -33,17 +33,17 @@ class PtmaDrawer extends StatelessWidget {
           ),
           ListTile(
             title: context.whiteText('Appointments'),
-            onTap: () => context.popAndPush(APPOINTMENT_LIST_PAGE),
+            onTap: () => context.popAndPush(AppointmentListPage.routeName),
           ),
           ListTile(
             title: context.whiteText('Workouts'),
-            onTap: () => context.popAndPush(WORKOUT_LIST_PAGE),
+            onTap: () => context.popAndPush(WorkoutListPage.routeName),
           ),
           ListTile(
             title: context.whiteText('Logout'),
-            onTap: () {
-              _deleteToken().then((value) => context.popAndPush(LOGIN_PAGE));
-            },
+            onTap: () => _deleteToken().then((value) => context.popAndPush(
+                  LoginPage.routeName,
+                )),
           ),
         ],
       ),

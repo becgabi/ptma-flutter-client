@@ -6,9 +6,9 @@ import 'package:ptma_flutter_client/ui/appointmentlist/appointment_list_cubit.da
 import 'package:ptma_flutter_client/ui/ptma_drawer.dart';
 import 'package:ptma_flutter_client/ui/util.dart';
 
-const APPOINTMENT_LIST_PAGE = "/appointments";
-
 class AppointmentListPage extends StatelessWidget {
+  static const routeName = "/appointments";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
